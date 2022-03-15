@@ -1,7 +1,15 @@
-<script setup></script>
-
 <template>
-  <main>
-    <h1>List page</h1>
-  </main>
+  <AdminLayout>
+    <h1>Hello world</h1>
+  </AdminLayout>
 </template>
+
+<script>
+import AdminLayout from "@/components/adminLayout.vue";
+
+export default {
+  components: {
+    AdminLayout,
+  },
+};
+</script>
