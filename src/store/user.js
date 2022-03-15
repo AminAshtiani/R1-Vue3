@@ -12,7 +12,7 @@ export const useUser = defineStore("user", {
     user: { ...initialValue },
   }),
   getters: {
-    getUser: (state) => state.user,
+    getUsername: (state) => state.user.username,
   },
   actions: {
     setUserCredential(user) {
@@ -20,7 +20,17 @@ export const useUser = defineStore("user", {
       this.user = user;
     },
     clearUserCredential() {
+      localStorage.removeItem("token");
       this.user = { ...initialValue };
     },
+  },
+  persist: {
+    enabled: true,
+    strategies: [
+      {
+        key: "user",
+        storage: localStorage,
+      },
+    ],
   },
 });
