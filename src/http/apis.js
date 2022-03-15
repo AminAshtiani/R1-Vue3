@@ -1,15 +1,15 @@
 import axiosInstance from "./request";
 const API = {
-  login: async ({ email, password }) => {
+  login: ({ email, password }) => {
     const user = {
       user: {
         email,
         password,
       },
     };
-    return await axiosInstance.post("/users/login", user);
+    return axiosInstance.post("/users/login", user).then((res) => res.data);
   },
-  register: async ({ email, password, username }) => {
+  register: ({ email, password, username }) => {
     const user = {
       user: {
         email,
@@ -17,7 +17,7 @@ const API = {
         username,
       },
     };
-    return await axiosInstance.post("/users", user);
+    return axiosInstance.post("/users", user).then((res) => res.data);
   },
 };
 
