@@ -1,7 +1,48 @@
-<script setup></script>
-
 <template>
-  <main>
-    <h1>Create page</h1>
-  </main>
+  <AdminLayout>
+    <BlogForm @handleSubmit="onSubmit" />
+  </AdminLayout>
 </template>
+<script>
+import { useToast } from "vue-toastification";
+import AdminLayout from "@/components/AdminLayout.vue";
+import BlogForm from "@/components/BlogForm.vue";
+import AlertText from "@/components/shared/AlertText.vue";
+import API from "@/http/apis";
+export default {
+  components: {
+    AdminLayout,
+    BlogForm,
+  },
+  setup() {
+    return {
+      toast: useToast(),
+    };
+  },
+  methods: {
+    onSubmit: function (article) {
+      const data = {
+        article,
+      };
+      API.createArticle(data)
+        .then((res) => {
+          this.toast.success({
+            component: AlertText,
+            props: {
+              strongTitle: "Post Created!",
+            },
+          });
+          this.$router.push("/admin");
+        })
+        .catch((err) => {
+          this.toast.error({
+            component: AlertText,
+            props: {
+              strongTitle: "Creatation Failed!",
+            },
+          });
+        });
+    },
+  },
+};
+</script>
