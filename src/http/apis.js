@@ -19,8 +19,13 @@ const API = {
     };
     return axiosInstance.post("/users", user).then((res) => res.data);
   },
-  getAllArticles: () => {
-    return axiosInstance.get("/articles").then((res) => res.data);
+  getAllArticles: (offset = 0, limit = 10) => {
+    return axiosInstance
+      .get(`/articles?offset=${offset}&limit=${limit}`)
+      .then((res) => res.data);
+  },
+  deleteArticle: (slug) => {
+    return axiosInstance.delete(`/articles/${slug}`).then((res) => res.data);
   }
 };
 
