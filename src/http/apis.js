@@ -19,6 +19,9 @@ const API = {
     };
     return axiosInstance.post("/users", user).then((res) => res.data);
   },
+  getAllArticles: () => {
+    return axiosInstance.get("/articles").then((res) => res.data);
+  }
 };
 
 export default API;
