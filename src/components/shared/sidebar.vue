@@ -1,7 +1,7 @@
 <template>
   <div class="col-2 Sidebar">
     <aside class="Sidebar__aside">
-      <h4 class="Sidebar__title">Posts</h4>
+      <h4 class="Sidebar__title">Post</h4>
 
       <router-link to="/admin" exact>
         <span class="oi oi-list"></span>
@@ -9,7 +9,7 @@
       </router-link>
       <router-link to="/admin/create">
         <span class="oi oi-plus"></span>
-        Add Articles
+        New Articles
       </router-link>
     </aside>
   </div>
