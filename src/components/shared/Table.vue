@@ -3,13 +3,18 @@ import moment from "moment";
 
 export default {
   name: "Table",
+  emits: ["onDelete"],
   props: {
     fields: Object,
-    rowCount: Number,
     posts: Array,
   },
   methods: {
-    dateFilter: (date) => moment(date).format("DD MMMM, YYYY"),
+    dateFilter(date) {
+      return moment(date).format("DD MMMM, YYYY");
+    },
+    handleDeleteClick(slug) {
+      this.$emit("onDelete", slug);
+    },
   },
 };
 </script>
@@ -47,7 +52,13 @@ export default {
                 >
                   Edit
                 </router-link>
-                <a class="dropdown-item">Delete</a>
+                <a
+                  class="dropdown-item"
+                  data-toggle="modal"
+                  data-target="#example"
+                  @click="handleDeleteClick(post.slug)"
+                  >Delete</a
+                >
               </div>
             </div>
           </td>
