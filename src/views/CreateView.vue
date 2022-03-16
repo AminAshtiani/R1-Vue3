@@ -25,7 +25,7 @@ export default {
         article,
       };
       API.createArticle(data)
-        .then((res) => {
+        .then(() => {
           this.toast.success({
             component: AlertText,
             props: {
@@ -35,12 +35,31 @@ export default {
           this.$router.push("/admin");
         })
         .catch((err) => {
-          this.toast.error({
-            component: AlertText,
-            props: {
-              strongTitle: "Creatation Failed!",
-            },
-          });
+          if (err.response) {
+            this.toast.error({
+              component: AlertText,
+              props: {
+                strongTitle: err.response.data.message,
+                msg: "",
+              },
+            });
+          } else if (err.request) {
+            this.toast.error({
+              component: AlertText,
+              props: {
+                strongTitle: "Creatation Failed!",
+                msg: "Check your connection",
+              },
+            });
+          } else {
+            this.toast.error({
+              component: AlertText,
+              props: {
+                strongTitle: "Creatation Failed!",
+                msg: "Unknown Error",
+              },
+            });
+          }
         });
     },
   },

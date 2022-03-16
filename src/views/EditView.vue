@@ -60,13 +60,31 @@ export default {
           this.$router.push("/admin");
         })
         .catch((err) => {
-          this.toast.error({
-            component: AlertText,
-            props: {
-              strongTitle: "Update Failed!",
-              msg: err.response.data.message,
-            },
-          });
+          if (err.response) {
+            this.toast.error({
+              component: AlertText,
+              props: {
+                strongTitle: err.response.data.message,
+                msg: "",
+              },
+            });
+          } else if (err.request) {
+            this.toast.error({
+              component: AlertText,
+              props: {
+                strongTitle: "Update Failed!",
+                msg: "Check your connection",
+              },
+            });
+          } else {
+            this.toast.error({
+              component: AlertText,
+              props: {
+                strongTitle: "Update Failed!",
+                msg: "Unknown Error",
+              },
+            });
+          }
         });
     },
   },

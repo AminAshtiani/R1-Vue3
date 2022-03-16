@@ -7,7 +7,11 @@
       @onDelete="updateSelectedPost"
     />
     <Pagination :totalPage="state.totalPage" @clicked="updateCurrentPage" />
-    <Modal title="hola!" message="this is a test" @confirm="deleteArticle" />
+    <Modal
+      title="Last Warning!"
+      message="Are you sure?"
+      @confirm="deleteArticle"
+    />
   </AdminLayout>
 </template>
 
@@ -73,13 +77,31 @@ export default {
           updateTotalpage();
         })
         .catch((err) => {
-          toast.error({
-            component: AlertText,
-            props: {
-              strongTitle: err.response.data.message,
-              msg: "",
-            },
-          });
+          if (err.response) {
+            toast.error({
+              component: AlertText,
+              props: {
+                strongTitle: err.response.data.message,
+                msg: "",
+              },
+            });
+          } else if (err.request) {
+            toast.error({
+              component: AlertText,
+              props: {
+                strongTitle: "Register Failed!",
+                msg: "Check your connection",
+              },
+            });
+          } else {
+            toast.error({
+              component: AlertText,
+              props: {
+                strongTitle: "Register Failed!",
+                msg: "Unknown Error",
+              },
+            });
+          }
         });
     }
     function deleteArticle() {
@@ -94,13 +116,31 @@ export default {
           });
         })
         .catch((err) => {
-          toast.error({
-            component: AlertText,
-            props: {
-              strongTitle: err.response.data.message,
-              msg: "",
-            },
-          });
+          if (err.response) {
+            toast.error({
+              component: AlertText,
+              props: {
+                strongTitle: err.response.data.message,
+                msg: "",
+              },
+            });
+          } else if (err.request) {
+            toast.error({
+              component: AlertText,
+              props: {
+                strongTitle: "Delete Failed!",
+                msg: "Check your connection",
+              },
+            });
+          } else {
+            toast.error({
+              component: AlertText,
+              props: {
+                strongTitle: "Delete Failed!",
+                msg: "Unknown Error",
+              },
+            });
+          }
         });
     }
     return {
