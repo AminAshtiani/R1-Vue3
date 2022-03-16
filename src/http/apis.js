@@ -26,6 +26,20 @@ const API = {
   },
   deleteArticle: (slug) => {
     return axiosInstance.delete(`/articles/${slug}`).then((res) => res.data);
+  },
+  updateArticle: (slug, article) => {
+    return axiosInstance
+      .put(`/articles/${slug}`, article)
+      .then((res) => res.data);
+  },
+  createArticle: (article) => {
+    return axiosInstance.post("/articles", article).then((res) => res.data);
+  },
+  getArticle: (slug) => {
+    return axiosInstance.get(`/articles/${slug}`).then((res) => res.data);
+  },
+  getTags: () => {
+    return axiosInstance.get("/tags").then((res) => res.data);
   }
 };
 
