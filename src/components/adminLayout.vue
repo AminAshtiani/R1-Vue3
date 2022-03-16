@@ -14,9 +14,8 @@
   </div>
 </template>
 <script>
-import { storeToRefs } from "pinia";
-import Navbar from "./shared/navbar.vue";
-import Sidebar from "./shared/sidebar.vue";
+import Navbar from "@/components/shared/navbar.vue";
+import Sidebar from "@/components/shared/sidebar.vue";
 import { useUser } from "@/store/user";
 
 export default {
