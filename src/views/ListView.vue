@@ -62,7 +62,6 @@ export default {
       fetchArticles(page);
     }
     function updateSelectedPost(slug) {
-      console.log(slug);
       state.selectedPost = slug;
     }
     function fetchArticles(page) {
@@ -73,7 +72,15 @@ export default {
           updateItemCount(res.articlesCount);
           updateTotalpage();
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          toast.error({
+            component: AlertText,
+            props: {
+              strongTitle: err.response.data.message,
+              msg: "",
+            },
+          });
+        });
     }
     function deleteArticle() {
       API.deleteArticle(state.selectedPost)
